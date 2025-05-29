@@ -1,0 +1,156 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Nuevo Evento</span>
+  </div>
+</div>
+<ion-content class="ion-padding">
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    <div class="form-card-info">
+      <h3>Información del Evento</h3>
+      <h5>
+        Llena todos los campos con <span class="required-asterisk">*</span> para
+        crear tu evento
+      </h5>
+
+      <ion-label position="stacked">
+        Nombre<span class="required-asterisk">*</span>
+      </ion-label>
+      <ion-item class="name-event">
+        <ion-input
+          formControlName="name"
+          placeholder="Ingresa nombre del evento"
+        ></ion-input>
+      </ion-item>
+
+      <ion-label position="stacked">
+        Tipo de Evento<span class="required-asterisk">*</span>
+      </ion-label>
+      <ion-item class="type-event">
+        <ion-select interface="action-sheet" placeholder="Selecciona un tipo">
+          <ion-select-option value="Feria">Feria</ion-select-option>
+          <ion-select-option value="Concierto">Análisis</ion-select-option>
+          <ion-select-option value="Taller">Taller</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-label position="stacked">
+        Descripción del evento<span class="required-asterisk">*</span>
+      </ion-label>
+      <ion-item class="description-event">
+        <ion-textarea
+          formControlName="descriptionEvent"
+          placeholder="Ingresa una descripción"
+        ></ion-textarea>
+      </ion-item>
+    </div>
+
+    <div class="form-image-inline">
+      <h2>Ingresa foto del Club</h2>
+
+      <input
+        type="file"
+        accept="image/*"
+        hidden
+        #fileInput
+        (change)="onFileSelected($event)"
+      />
+
+      <ion-button class="image-button" fill="clear" (click)="fileInput.click()">
+        <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+        <span>Seleccionar imagen</span>
+      </ion-button>
+
+      <div *ngIf="previewImage" class="image-preview">
+        <img [src]="previewImage" alt="Vista previa" />
+      </div>
+    </div>
+
+    <div class="form-card-info">
+      <ion-label class="event-date" position="stacked">
+        Fecha de inicio del evento<span class="required-asterisk">*</span>
+      </ion-label>
+      <hr class="custom-hr" />
+      <ion-item class="ion-event-date">
+        <ion-input
+          formControlName="eventInitDate"
+          placeholder="mm/dd/yyyy"
+          type="date"
+        ></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="form-card-info">
+      <ion-label class="event-date" position="stacked">
+        Fecha de conclusión del evento</ion-label
+      >
+      <hr class="custom-hr" />
+      <ion-item class="ion-event-date">
+        <ion-input
+          formControlName="eventEndDate"
+          placeholder="mm/dd/yyyy"
+          type="date"
+        ></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="form-card-info">
+      <ion-label>
+        Hora de Inicio<span class="required-asterisk">*</span>
+      </ion-label>
+      <hr class="custom-hr" />
+      <ion-datetime
+        formControlName="eventInitTime"
+        class="event-time"
+        presentation="time"
+        hourCycle="h12"
+      ></ion-datetime>
+    </div>
+
+    <div class="form-card-info">
+      <ion-label> Hora de Conclusión</ion-label>
+      <hr class="custom-hr" />
+      <ion-datetime
+        formControlName="eventEndTime"
+        class="event-time"
+        presentation="time"
+        hourCycle="h12"
+      ></ion-datetime>
+    </div>
+
+    <div class="form-card-info">
+      <ion-label position="stacked">
+        Precio<span class="required-asterisk">*</span>
+      </ion-label>
+      <ion-item class="price-event">
+        <ion-input
+          type="number"
+          formControlName="price"
+          placeholder="Ingresa Precio del evento"
+        ></ion-input>
+      </ion-item>
+
+      <ion-label position="stacked">
+        Ubicación<span class="required-asterisk">*</span>
+      </ion-label>
+      <ion-item class="location-event">
+        <ion-input
+          formControlName="location"
+          placeholder="Ingresa ubicación del evento"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-checkbox slot="start" formControlName="shareEvent"></ion-checkbox>
+        <ion-label class="label-page-share"
+          >Deseo que mi evento esté en los anuncios de la aplicación (costo de
+          $10)</ion-label
+        >
+      </ion-item>
+
+      <ion-button class="sendForm" expand="block" type="submit">
+        Crear Evento
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

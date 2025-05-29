@@ -1,0 +1,64 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Mi perfil</span>
+  </div>
+</div>
+
+<ion-content class="my-profile-container">
+  <div class="body-box">
+    <a href="/app/my-profile-settings" class="icon-settings">
+      <ion-icon name="settings-outline" class="icon"></ion-icon>
+    </a>
+
+    <div class="avatar-box">
+      <ion-avatar class="custom-avatar">
+        <img alt="user image" [src]="userLogged.img" />
+      </ion-avatar>
+    </div>
+    <div class="username-text">{{userLogged.username}}</div>
+
+    <p class="book-list-title ion-text-uppercase">
+      Mis libros disponibles a intercambio
+    </p>
+    <div class="book-feed">
+      <div class="book-scroll-container">
+        <ion-card class="book-card add-book-card" (click)="goToRegisterBook()">
+          <div class="add-book-icon">
+            <ion-icon name="add-outline"></ion-icon>
+          </div>
+        </ion-card>
+        <ion-card
+          *ngFor="let book of tradeBooks"
+          class="book-card"
+          (click)="goToBook(book.id, tradeBooks)"
+        >
+          <img [src]="book.img" alt="{{ book.name }}" />
+          <ion-card-header>
+            <ion-card-title>{{ book.name }}</ion-card-title>
+            <ion-card-subtitle>A {{ book.distance }}Km de ti</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </div>
+
+    <p class="book-list-title ion-text-uppercase">
+      Mis favoritos / libros que quiero leer
+    </p>
+    <div class="book-feed">
+      <div class="book-scroll-container">
+        <ion-card
+          *ngFor="let book of favoriteBooks"
+          class="book-card"
+          (click)="goToBook(book.id, favoriteBooks)"
+        >
+          <img [src]="book.img" alt="{{ book.name }}" />
+          <ion-card-header>
+            <ion-card-title>{{ book.name }}</ion-card-title>
+            <ion-card-subtitle>A {{ book.distance }}Km de ti</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>

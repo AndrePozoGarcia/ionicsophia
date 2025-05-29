@@ -1,0 +1,36 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Perfil - {{ user.username }}</span>
+  </div>
+</div>
+
+<ion-content class="profile-container">
+  <div class="body-box">
+    <div class="avatar-box">
+      <ion-avatar class="custom-avatar">
+        <img alt="user image" [src]="user.img" />
+      </ion-avatar>
+    </div>
+    <div class="username-text">{{user.username}}</div>
+
+    <p class="book-list-title ion-text-uppercase">
+      Libros disponibles para intercambio
+    </p>
+    <div class="book-feed">
+      <div class="book-scroll-container">
+        <ion-card
+          *ngFor="let book of tradeBooks"
+          class="book-card"
+          (click)="goToBook(book.id, tradeBooks)"
+        >
+          <img [src]="book.img" alt="{{ book.name }}" />
+          <ion-card-header>
+            <ion-card-title>{{ book.name }}</ion-card-title>
+            <ion-card-subtitle>A {{ book.distance }}Km de ti</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>

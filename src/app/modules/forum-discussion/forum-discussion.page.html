@@ -1,0 +1,37 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Intercambio - {{forum?.title}}</span>
+  </div>
+</div>
+
+<ion-content class="forum-discussion-container">
+  <div class="comments-box">
+    <ion-list>
+      <ion-item *ngFor="let comment of orderedComments">
+        <ion-avatar slot="start">
+          <img [src]="comment.userImg || 'assets/img/users/default-user.png'" />
+        </ion-avatar>
+        <ion-label>
+          <h2 class="username">{{ comment.userName }}</h2>
+          <p class="comment-text">{{ comment.comment }}</p>
+          <img
+            *ngIf="comment.imgAttached"
+            [src]="comment.imgAttached"
+            class="attached-image"
+          />
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="comment-input">
+    <ion-item>
+      <ion-input
+        [(ngModel)]="newComment"
+        placeholder="Escribe un comentario..."
+      ></ion-input>
+      <ion-button fill="clear" (click)="submitComment()">Enviar</ion-button>
+    </ion-item>
+  </div>
+</ion-content>

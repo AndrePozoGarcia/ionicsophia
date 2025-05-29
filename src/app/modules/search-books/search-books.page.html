@@ -1,0 +1,29 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Encuentra tu libro</span>
+  </div>
+</div>
+<ion-content class="search-books-container">
+  <div class="body-box">
+    <ion-searchbar
+      show-cancel-button="focus"
+      placeholder="Busqueda por genero"
+    ></ion-searchbar>
+
+    <ion-searchbar
+      show-cancel-button="focus"
+      placeholder="Busqueda por Titulo"
+    ></ion-searchbar>
+
+    <ion-searchbar
+      show-cancel-button="focus"
+      placeholder="Busqueda por autor"
+    ></ion-searchbar>
+
+    <ion-searchbar
+      show-cancel-button="focus"
+      placeholder="Busqueda por tipo de tapa"
+    ></ion-searchbar>
+  </div>
+</ion-content>

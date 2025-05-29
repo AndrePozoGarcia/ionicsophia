@@ -1,0 +1,36 @@
+<ion-content class="custom-feed-screen" fullscreen>
+  <div class="top-box">
+    <div class="top-top-box"></div>
+    <div class="top-center-box">
+      <p><strong>Ayuda a Sophia a personalizar tu feed</strong></p>
+      <p>
+        Sophia quiere preparar el lugar para que se adapte a ti, ayúdala
+        eligiendo las categorías que te interesen!
+      </p>
+    </div>
+  </div>
+
+  <div class="category-box">
+    <ion-grid>
+      <ion-row *ngFor="let row of categoriesChunks">
+        <ion-col size="6" *ngFor="let category of row">
+          <ion-card (click)="toggleCategory(category)">
+            <img [src]="category.img" [alt]="category.name" />
+            <ion-item  lines="none">
+              <ion-label>{{ category.name }}</ion-label>
+              <ion-checkbox
+                slot="end"
+                [(ngModel)]="category.selected"
+              ></ion-checkbox>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="bottom-box">
+    <ion-button shape="round" fill="outline" color="danger">MAS</ion-button>
+    <ion-button shape="round" (click)="save()">Listo</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,87 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Configuración de perfil</span>
+  </div>
+</div>
+
+<ion-content class="edit-user-container" [formGroup]="profileForm">
+  <div class="body-box">
+    <div class="profile-header">
+      <ion-avatar class="edit-avatar">
+        <ion-icon name="add-circle-outline" class="edit-icon"></ion-icon>
+      </ion-avatar>
+      <div class="username">{{ userLogged.username }}</div>
+    </div>
+
+    <div class="block">
+      <h2 class="block-title">Shipping Info</h2>
+      <div class="input-row">
+        <ion-icon name="location-outline" class="icon-left"></ion-icon>
+        <ion-input
+          placeholder="Ubicacion"
+          formControlName="location"
+        ></ion-input>
+      </div>
+      <div class="input-row">
+        <ion-icon name="home-outline" class="icon-left"></ion-icon>
+        <ion-input
+          placeholder="Ubicacion de su hogar"
+          formControlName="homeLocation"
+        ></ion-input>
+      </div>
+      <div class="input-row">
+        <ion-icon name="briefcase-outline" class="icon-left"></ion-icon>
+        <ion-input
+          placeholder="Ubicacion de su trabajo"
+          formControlName="workLocation"
+        ></ion-input>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2 class="block-title">Datos personales</h2>
+      <div class="input-row">
+        <ion-icon name="mail-outline" class="icon-left"></ion-icon>
+        <ion-input placeholder="Email" formControlName="email"></ion-input>
+      </div>
+      <div class="input-row">
+        <ion-icon name="call-outline" class="icon-left"></ion-icon>
+        <ion-input placeholder="Phone" formControlName="phone"></ion-input>
+      </div>
+      <div class="input-row">
+        <ion-icon name="lock-closed-outline" class="icon-left"></ion-icon>
+        <ion-input
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+        ></ion-input>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2 class="block-title">Métodos de pago</h2>
+      <div class="input-row">
+        <ion-icon name="card-outline" class="icon-left"></ion-icon>
+        <ion-input
+          placeholder="Número de tarjeta"
+          formControlName="cardNumber"
+        ></ion-input>
+      </div>
+      <div class="input-row">
+        <ion-icon name="gift-outline" class="icon-left"></ion-icon>
+        <ion-input
+          placeholder="Saldo Gift Card"
+          formControlName="giftBalance"
+          [value]="'$' + profileForm.get('giftBalance')?.value"
+        ></ion-input>
+      </div>
+    </div>
+
+    <div class="save-button-container">
+      <ion-button (click)="saveChanges()" color="primary"
+        >Guardar cambios</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,67 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Foros</span>
+  </div>
+</div>
+
+<ion-content class="forum-container">
+  <div class="forums-block">
+    <h3 class="block-title">Espacios creados por usuarios</h3>
+
+    <ion-list>
+      <ion-item
+        *ngFor="let forum of forums"
+        button
+        (click)="goToForum(forum.id)"
+      >
+        <ion-label>
+          <h2 class="forum-title">{{ forum.title }}</h2>
+          <p class="forum-created">Creado por {{ forum.createdBy }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="new-forum-button-container">
+    <ion-button
+      (click)="openModal()"
+      color="primary"
+      fill="solid"
+      shape="round"
+    >
+      Nuevo foro
+    </ion-button>
+  </div>
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="isModalOpen = false">
+    <ng-template>
+      <ion-content class="modal-content">
+        <ion-header>
+          <ion-toolbar color="light">
+            <ion-title>Nuevo Foro</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="isModalOpen = false">
+                <ion-icon name="close-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+
+        <ion-item>
+          <ion-label position="floating">Nombre / Tema del Foro</ion-label>
+          <ion-input [(ngModel)]="newForumTitle"></ion-input>
+        </ion-item>
+
+        <ion-footer class="ion-padding">
+          <ion-button
+            expand="block"
+            (click)="createForum()"
+            [disabled]="!newForumTitle"
+          >
+            Crear foro
+          </ion-button>
+        </ion-footer>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

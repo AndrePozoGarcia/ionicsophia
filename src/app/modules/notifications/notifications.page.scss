@@ -1,0 +1,29 @@
+.notification-content {
+
+  .body-box {
+    padding: 1rem;
+    margin: auto;
+    width: 90%;
+
+
+    ion-chip {
+      margin-bottom: 0.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      white-space: normal;
+
+      &.unread {
+        background-color: #f4f4f4;
+        font-weight: bold;
+        color: #000;
+      }
+
+      &.read {
+        background-color: #e0e0e0;
+        font-weight: normal;
+        color: #666;
+      }
+    }
+  }
+}

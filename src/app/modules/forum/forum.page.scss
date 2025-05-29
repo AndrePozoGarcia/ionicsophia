@@ -1,0 +1,54 @@
+.forum-container {
+  .forums-block {
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1.5rem;
+
+    .block-title {
+      color: #333;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    ion-list {
+      background: transparent;
+
+      ion-item {
+        --background: #ffffff;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+
+        .forum-title {
+          color: #8b77c4;
+          font-weight: 600;
+        }
+
+        .forum-created {
+          color: #a677ca;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  .new-forum-button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+
+  .modal-content {
+    ion-item {
+      margin-top: 2rem;
+      --border-color: #6a51b5;
+      border-radius: 1rem;
+      margin: 1rem;
+    }
+
+    ion-button {
+      margin: 1rem;
+    }
+  }
+}

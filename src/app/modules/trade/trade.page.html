@@ -1,0 +1,84 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Intercambio</span>
+  </div>
+</div>
+
+<ion-content class="trades-container">
+  <div class="body-box">
+    <ion-segment [(ngModel)]="selectedTab" class="tabs-box">
+      <ion-segment-button value="pending">
+        <ion-label class="ion-text-uppercase">
+          Solicitudes de intercambio</ion-label
+        >
+      </ion-segment-button>
+      <ion-segment-button value="accepted">
+        <ion-label class="ion-text-uppercase">Solicitudes aceptadas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="selectedTab === 'pending'" class="tab-content">
+      <h3 class="section-title">Pendientes por aceptar</h3>
+      <ion-list *ngIf="pendingBooks.length > 0">
+        <ion-item-sliding *ngFor="let book of pendingBooks">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img [src]="book.img" />
+            </ion-thumbnail>
+            <ion-label>
+              <h2>{{ book.userUserName }} - {{ book.name }}</h2>
+              <p>Hace {{ book.sinceTime }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item-options side="start">
+            <ion-item-option color="danger" (click)="rejectTradeBook(book.id)">
+              Rechazar
+            </ion-item-option>
+          </ion-item-options>
+          <ion-item-options side="end">
+            <ion-item-option color="success" (click)="acceptTradeBook(book.id)">
+              Aceptar
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+      <h3 class="section-title">Esperando respuesta</h3>
+      <ion-list *ngIf="waitingBooks.length > 0">
+        <ion-item
+          *ngFor="let book of waitingBooks"
+          button
+          (click)="goToRequestBook(book.id)"
+        >
+          <ion-thumbnail slot="start">
+            <img [src]="book.img" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ book.userUserName }} - {{ book.name }}</h2>
+            <p>Hace {{ book.sinceTime }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div *ngIf="selectedTab === 'accepted'" class="tab-content">
+      <h3 class="section-title">Solicitudes que fueron aceptadas</h3>
+      <ion-list *ngIf="acceptedBooks.length > 0">
+        <ion-item
+          *ngFor="let book of acceptedBooks"
+          button
+          (click)="goToAcceptedBook(book.id)"
+        >
+          <ion-thumbnail slot="start">
+            <img [src]="book.img" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ book.userUserName }} - {{ book.name }}</h2>
+            <p>Hace {{ book.sinceTime }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

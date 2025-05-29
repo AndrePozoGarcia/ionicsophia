@@ -1,0 +1,26 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Notificaciones</span>
+  </div>
+</div>
+
+<ion-content class="notification-content">
+  <div class="body-box">
+    <ion-item lines="none">
+      <ion-checkbox slot="end" [(ngModel)]="showOnlyUnread"
+        >No leídos</ion-checkbox
+      >
+    </ion-item>
+    <ion-list>
+      <ion-chip
+        *ngFor="let notification of filteredNotifications"
+        [ngClass]="{ 'unread': !notification.readIt, 'read': notification.readIt }"
+        expand="block"
+        (click)="goToNotificationReference(notification)"
+      >
+        {{ notification.summaryText }}
+      </ion-chip>
+    </ion-list>
+  </div>
+</ion-content>

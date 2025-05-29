@@ -1,0 +1,50 @@
+.splash-screen {
+  --background: #6a51b5;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+
+  .circle {
+    position: absolute;
+    width: 40rem;
+    height: 40rem;
+    background-color: #e9ddf2;
+    border-radius: 50%;
+    top: 10%;
+    left: -300px;
+    z-index: 1; 
+  }
+
+  .ring {
+    position: absolute;
+    width: 42rem; 
+    height: 42rem;
+    border: 50px solid #d1c9e8;
+    border-radius: 50%;
+    top: 10%;
+    left: -320px;
+    z-index: 2;
+
+    .curved-text {
+      position: absolute;
+      top: 0%;
+      left: 42%;
+      width: 25rem;
+      height: 25rem;
+      z-index: 3;
+      word-spacing: 1rem;
+      font-family: 'IM Fell French Canon', serif;
+    }
+  }
+
+  .logo {
+    position: absolute;
+    z-index: 4;
+    width: 150px;
+    top: 45%;
+    margin-left: 7rem;
+    transform: translate(-50%, -50%);
+  }
+}

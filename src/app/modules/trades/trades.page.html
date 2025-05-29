@@ -1,0 +1,56 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Intercambio</span>
+  </div>
+</div>
+
+
+<ion-content class="ion-padding" *ngIf="book">
+  <div class="image-container ion-text-center">
+    <img [src]="book.img" alt="Portada del libro" class="book-image" />
+  </div>
+
+  <div class="ion-text-center">
+    <p class="owner-text">este libro pertenece a</p>
+    <p class="owner-username">{{ book.userUserName }}</p>
+  </div>
+
+  <div class="ion-text-center">
+    <ion-icon *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+      [name]="i < (book.review || 0) ? 'star' : 'star-outline'" class="star"></ion-icon>
+      <p class="review-link" (click)="goToReviews()">Ver reseñas</p>
+  </div>
+
+  <ion-card class="details-card">
+    <ion-card-header>
+      <div class="header-container">
+        <div class="text-container">
+          <ion-text>Detalles</ion-text>
+          <ion-card-title>{{ book.name }}</ion-card-title>
+          <p class="distance">a {{ book.distance }} Km de ti</p>
+        </div>
+        <ion-button class="favorite-button" fill="clear" (click)="toggleFavorite()">
+          <ion-icon name="heart"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p><strong>Autor:</strong> {{ book.author }}</p>
+      <p><strong>Género:</strong> {{ book.genere }}</p>
+      <p><strong>Estado del libro:</strong> {{ book.bookStatus }}</p>
+      <p><strong>Tapa:</strong> {{ book.cover }}</p>
+    </ion-card-content>
+  
+    <ion-button class="exchange-button" (click)="openExchangeModal()">
+      SOLICITAR INTERCAMBIO
+    </ion-button>
+  </ion-card>
+  
+
+  <div class="sale-text">
+    este libro tiene habilitada la venta, si le interesa entre
+    <a href="#">aquí</a>.
+  </div>
+</ion-content>

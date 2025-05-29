@@ -1,0 +1,50 @@
+.forum-discussion-container {
+  --padding-top: 0.5rem;
+
+  .comments-box {
+    padding: 1rem;
+
+    ion-item {
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      border-radius: 0.75rem;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+      .username {
+        font-weight: bold;
+        color: #5738ab;
+        margin-bottom: 0.25rem;
+      }
+
+      .comment-text {
+        margin: 0;
+        color: #333;
+      }
+
+      .attached-image {
+        margin-top: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+        object-fit: cover;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+
+  .comment-input {
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #eee;
+    background: #fff;
+    background-color: #e9ddf2;
+
+    ion-item {
+      border-radius: 1rem;
+      --background: #f4f4f4;
+
+      ion-input {
+        flex: 1;
+      }
+    }
+  }
+}

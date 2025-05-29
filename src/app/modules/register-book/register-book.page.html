@@ -1,0 +1,69 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Registro</span>
+  </div>
+</div>
+
+<ion-content class="register-book-page">
+  <div class="upload-section">
+    <div class="upload-label">
+      <p>Carga la portada del libro</p>
+      <input
+        type="file"
+        accept="image/*"
+        hidden
+        #bookCoverInput
+        (change)="onImageSelected($event, 'cover')"
+      />
+      <ion-button class="upload-button" (click)="bookCoverInput.click()"
+        >Cargar</ion-button
+      >
+    </div>
+    <div *ngIf="previewCover" class="image-preview">
+      <img [src]="previewCover" alt="Portada del libro" />
+    </div>
+  </div>
+  <div class="form-box" [formGroup]="formRegistryBook">
+    <ion-item lines="full" class="custom-input">
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+      <ion-icon name="close-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="full" class="custom-input">
+      <ion-label position="stacked">Detalles</ion-label>
+      <ion-input type="text" formControlName="description"></ion-input>
+      <ion-icon name="close-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="full" class="custom-input">
+      <ion-label position="stacked">Precio</ion-label>
+      <ion-input type="number" formControlName="price"></ion-input>
+      <ion-icon name="close-outline" slot="end"></ion-icon>
+    </ion-item>
+  </div>
+
+  <div class="upload-section">
+    <div class="upload-label">
+      <p>Carga el qr del pago</p>
+      <input
+        type="file"
+        accept="image/*"
+        hidden
+        #qrInput
+        (change)="onImageSelected($event, 'qr')"
+      />
+      <ion-button class="upload-button" expand="block" (click)="qrInput.click()"
+        >Cargar</ion-button
+      >
+    </div>
+    <div *ngIf="previewQR" class="image-preview">
+      <img [src]="previewQR" alt="QR del pago" />
+    </div>
+  </div>
+
+  <ion-button expand="block" class="submit-button" (click)="save()">
+    Aceptar
+  </ion-button>
+</ion-content>

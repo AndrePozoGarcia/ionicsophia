@@ -1,0 +1,16 @@
+<ion-content class="splash-screen" fullscreen>
+  <div class="circle"></div>
+  <div class="ring">
+    <svg viewBox="0 0 300 300" class="curved-text">
+      <defs>
+        <path id="curve" d="M 150,50 A 100,140 0 0,1 250,250" />
+      </defs>
+      <text width="300">
+        <textPath href="#curve" startOffset="50%" text-anchor="middle" fill="#976db8" font-size="20">
+          {{curvedText}}
+        </textPath>
+      </text>
+    </svg>      
+  </div>
+  <ion-img src="assets/img/logo-sophia.png" class="logo"></ion-img>
+</ion-content>

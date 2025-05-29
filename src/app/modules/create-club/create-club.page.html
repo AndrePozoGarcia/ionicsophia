@@ -1,0 +1,132 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Nuevo Club</span>
+  </div>
+</div>
+<ion-content class="ion-padding">
+  <form [formGroup]="clubForm" (ngSubmit)="onSubmit()">
+    <div class="form-card-info">
+      <h3>Información del Club</h3>
+      <h5>
+        Llena todos los campos con <span class="required-asterisk">*</span> para
+        crear tu club
+      </h5>
+
+      <ion-label position="stacked">
+        Nombre<span class="required-asterisk">*</span>
+      </ion-label>
+      <ion-item class="name-club">
+        <ion-input
+          formControlName="name"
+          placeholder="Ingresa nombre del club"
+        ></ion-input>
+      </ion-item>
+
+      <ion-label position="stacked">
+        Descripción<span class="required-asterisk">*</span>
+      </ion-label>
+      <ion-item class="description-club">
+        <ion-textarea
+          formControlName="descriptionClub"
+          placeholder="Ingresa una descripción"
+        ></ion-textarea>
+      </ion-item>
+
+      <ion-label position="stacked">
+        Contacto<span class="required-asterisk">*</span>
+      </ion-label>
+      <ion-item class="description-club">
+        <ion-textarea
+          formControlName="contact"
+          placeholder="Ingresa un número de contacto"
+        ></ion-textarea>
+      </ion-item>
+    </div>
+
+    <div class="form-image-inline">
+      <h2>Ingresa foto del Club</h2>
+
+      <input
+        type="file"
+        accept="image/*"
+        hidden
+        #fileInput
+        (change)="onFileSelected($event)"
+      />
+
+      <ion-button class="image-button" fill="clear" (click)="fileInput.click()">
+        <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+        <span>Seleccionar imagen</span>
+      </ion-button>
+
+      <div *ngIf="previewImage" class="image-preview">
+        <img [src]="previewImage" alt="Vista previa" />
+      </div>
+    </div>
+
+    <div class="form-card-info">
+      <ion-label class="club-date" position="stacked">
+        Días de Encuentro<span class="required-asterisk">*</span>
+      </ion-label>
+      <hr class="custom-hr" />
+      <ion-item class="ion-club-date">
+        <ion-textarea
+          formControlName="clubInitDate"
+          placeholder="Ingresa días de encuentro del club (ej: Lunes y Viernes)"
+          auto-grow="true"
+          rows="2"
+        >
+        </ion-textarea>
+      </ion-item>
+    </div>
+
+    <div class="form-card-info">
+      <ion-label>
+        Hora de Inicio del Club<span class="required-asterisk">*</span>
+      </ion-label>
+      <hr class="custom-hr" />
+      <ion-datetime
+        formControlName="clubInitTime"
+        class="club-time"
+        presentation="time"
+        hourCycle="h12"
+      ></ion-datetime>
+    </div>
+
+    <div class="form-card-info">
+      <ion-label position="stacked">
+        Precio de Inscripción<span class="required-asterisk">*</span>
+      </ion-label>
+      <ion-item class="price-club">
+        <ion-input
+          type="number"
+          formControlName="price"
+          placeholder="Ingresa Precio"
+        ></ion-input>
+      </ion-item>
+
+      <ion-label position="stacked">
+        Ubicación<span class="required-asterisk">*</span>
+      </ion-label>
+      <ion-item class="location-club">
+        <ion-input
+          formControlName="location"
+          placeholder="Ingresa ubicación aproximada del club"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-checkbox slot="start" formControlName="shareClub"></ion-checkbox>
+        <ion-label class="label-page-share"
+          >Deseo que mi club esté en los anuncios de la aplicación (costo de
+          $10)</ion-label
+        >
+      </ion-item>
+
+      <ion-button class="sendForm" expand="block" type="submit">
+        Crear Club
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

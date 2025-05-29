@@ -1,0 +1,78 @@
+.slide1-container {
+  width: 100%;
+  height: 100%;
+  background-color: #6a51b5;
+  color: white;
+}
+
+.slide2-container {
+  width: 100%;
+  height: 100%;
+  background-color: #a677ca;
+  color: white;
+}
+
+.slide3-container {
+  width: 100%;
+  height: 100%;
+  background-color: #222428;
+  color: #aba7e3;
+}
+
+.title-box {
+  font-size: 3rem;
+  height: 30%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+  }
+}
+
+.icon-box {
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.description-box {
+  font-size: 2rem;
+  height: 30%;
+  justify-content: center;
+  align-items: flex-start;
+
+  p {
+    width: 80%;
+    font-family: 'Times New Roman', Times, serif;
+  }
+}
+
+.circle {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+  }
+}
+
+.ok-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

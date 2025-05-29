@@ -1,0 +1,24 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Intercambio - Aceptaste la solicitud</span>
+  </div>
+</div>
+
+<ion-content class="accepted-container">
+  <div class="image-container">
+    <img src="assets/img/flechas.png" alt="Flechas" />
+  </div>
+
+  <div class="info-box">
+    <h2 class="title">Solicitud Aceptada</h2>
+    <p class="description">
+      Has aceptado la solicitud de <strong>{{ trade?.userUserName }}</strong> Se
+      ha habilitado el chat, ahora puedes coordinar con
+      <strong>{{ trade?.userUserName }}</strong> el lugar de intercambio del
+      libro <strong>{{ trade?.name }}</strong>.
+    </p>
+  </div>
+
+  <div class="chat-action" (click)="goToChat()">Ir al chat ahora</div>
+</ion-content>

@@ -1,0 +1,15 @@
+<ion-content class="init-screen" fullscreen>
+  <div class="container">
+    <div>
+      <ion-img src="assets/img/logo-sophia2.png" class="logo"></ion-img>
+    </div>
+    <div class="enter-button">
+      <ion-button id="open-action-sheet">Comenzar</ion-button>
+      <ion-action-sheet
+        trigger="open-action-sheet"
+        [buttons]="actionSheetButtons"
+        (didDismiss)="handleActionSheet($event)"
+      ></ion-action-sheet>
+    </div>
+  </div>
+</ion-content>

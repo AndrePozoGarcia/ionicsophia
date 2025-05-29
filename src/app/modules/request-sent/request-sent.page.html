@@ -1,0 +1,21 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Intercambio - Solicitud Enviada</span>
+  </div>
+</div>
+
+<ion-content class="accepted-container">
+  <div class="image-container">
+    <img src="assets/img/flechas.png" alt="Flechas" />
+  </div>
+
+  <div class="info-box">
+    <h2 class="title">Solicitud Enviada</h2>
+    <p class="description">
+      Has enviado una solicitud! para el libro
+      <strong>{{ trade?.name }}</strong>. Espera a que
+      <strong>{{ trade?.userUserName }}</strong> responda. Suerte!
+    </p>
+  </div>
+</ion-content>

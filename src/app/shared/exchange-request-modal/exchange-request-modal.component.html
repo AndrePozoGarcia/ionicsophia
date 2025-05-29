@@ -1,0 +1,13 @@
+<ion-content class="ion-padding modal-content">
+  <ion-img [src]="img" class="book-img"></ion-img>
+
+  <div class="info-box">
+    <h3>Precio: ${{ price }}</h3>
+    <h3>Comisión: ${{ fee }}</h3>
+    <h3>Total: ${{ total }}</h3>
+
+    <ion-button expand="block" (click)="verifyPayment()"
+      >Verificar Pago</ion-button
+    >
+  </div>
+</ion-content>

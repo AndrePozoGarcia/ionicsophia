@@ -1,0 +1,87 @@
+<ion-content class="login-screen" fullscreen>
+  <div class="form-box">
+    <form [formGroup]="formRegistryUser" (ngSubmit)="save()">
+      <ion-grid>
+        <ion-row class="ion-margin-vertical">
+          <ion-col size="12">
+            <ion-item>
+              <ion-input
+                formControlName="name"
+                placeholder="Ingrese su nombre completo"
+                [clearInput]="true"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-vertical">
+          <ion-col size="12">
+            <ion-item>
+              <ion-input
+                formControlName="username"
+                placeholder="Ingrese su usuario"
+                [clearInput]="true"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-vertical">
+          <ion-col size="12">
+            <ion-item>
+              <ion-input
+                formControlName="email"
+                type="email"
+                placeholder="Ingrese su correo"
+                [clearInput]="true"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-vertical">
+          <ion-col size="12">
+            <ion-item>
+              <ion-input
+                formControlName="confirmEmail"
+                type="email"
+                placeholder="Confirme su correo"
+                [clearInput]="true"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-vertical">
+          <ion-col size="12">
+            <ion-item>
+              <ion-input
+                formControlName="password"
+                type="password"
+                placeholder="Ingrese su contraseña"
+                [clearInput]="true"
+                value="password"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-vertical">
+          <ion-col size="12">
+            <ion-item>
+              <ion-input
+                formControlName="confirmPassword"
+                type="password"
+                placeholder="Confirme su contraseña"
+                [clearInput]="true"
+                value="password"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div class="flex ion-justify-content-center">
+        <ion-button type="submit">Registrar</ion-button>
+      </div>
+    </form>
+  </div>
+  <div class="flex ion-align-items-center ion-justify-content-center">
+    <p>¿Ya tienes una cuenta?</p>
+    <a class="ion-margin-start" href="/login">Iniciar sesión</a>
+  </div>
+</ion-content>

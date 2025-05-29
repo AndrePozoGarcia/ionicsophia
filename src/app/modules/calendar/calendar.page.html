@@ -1,0 +1,70 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Calendario</span>
+  </div>
+</div>
+<ion-content class="ion-padding calendario-page">
+  <h2>Eventos</h2>
+
+  <div class="ion-padding">
+    <ion-list>
+      <ion-card *ngFor="let event of events" class="card-event-horizontal">
+        <div class="event-content">
+          <img [src]="event.imgEvent" alt="Event Image" class="event-image" />
+          <div class="event-info">
+            <p class="event-type">{{ event.typeEvent }}</p>
+            <p class="event-name">{{ event.name }}</p>
+            <p class="event-date">{{ event.eventInitDate }}</p>
+            <p class="event-location">{{ event.location }}</p>
+          </div>
+          <ion-button
+            fill="clear"
+            class="more-button"
+            (click)="goToDetailsEvent(event.id)">
+            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+            Saber más
+          </ion-button>
+        </div>
+      </ion-card>
+    </ion-list>
+  </div>
+  
+
+  <div class="button-container">
+    <ion-button class="custom-button" color="primary" (click)="goToCreateEvent()">
+      <ion-text class="text-design">Nuevo Evento</ion-text>
+    </ion-button>
+  </div>
+
+  <h2>Clubes</h2>
+
+  <div class="ion-padding">
+    <ion-list>
+      <ion-card *ngFor="let club of clubs" class="card-club-horizontal">
+        <div class="club-content">
+          <img [src]="club.imgClub" alt="Club Image" class="club-image" />
+          <div class="club-info">
+            <p class="club-name">{{ club.name }}</p>
+            <p class="club-date">{{ club.ClubDate }} - {{ club.eventInitTime }}</p>
+            <p class="club-location">{{ club.location }}</p>
+          </div>
+          <ion-button
+            fill="clear"
+            class="more-button"
+            (click)="goToDetailsClub(club.id)">
+            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+            Saber más
+          </ion-button>
+        </div>
+      </ion-card>
+    </ion-list>
+  </div>
+
+  <div class="button-container">
+    <ion-button class="custom-button" color="primary" (click)="goToCreateClub()">
+      <ion-text class="text-design">Nuevo Club</ion-text>
+    </ion-button>
+  </div>
+
+</ion-content>

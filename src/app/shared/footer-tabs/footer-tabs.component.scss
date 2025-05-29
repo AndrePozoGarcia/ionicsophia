@@ -1,0 +1,19 @@
+.footer-tabs {
+  ion-tab-bar {
+    background: white; /* Fondo blanco */
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    --color: #6a51b5; /* Color base para íconos y texto */
+    --color-selected: #eb5f7a; /* Color cuando el tab está activo */
+  }
+
+  ion-tab-button {
+    --color: #6a51b5;
+  }
+
+  ion-tab-button.ion-selected {
+    --color: #eb5f7a; 
+  }
+}

@@ -1,0 +1,152 @@
+.home-container {
+  --background: white;
+
+  .header-box {
+    background-color: #d3bbe4;
+    height: 7rem;
+    border: 1px solid #5738ab;
+    color: #5738ab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 2rem;
+    border-top-right-radius: 2rem;
+
+    .logo {
+      width: 6rem;
+    }
+
+    .icons-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 1rem;
+      background-color: #d3bbe4;
+      margin-top: 1rem;
+
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+      }
+
+      .icon-link {
+        position: relative;
+        display: inline-block;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        font-size: 12px;
+        border-radius: 50%;
+        padding: 2px 6px;
+      }
+    }
+  }
+
+  .body-box {
+    width: 90%;
+    margin: auto;
+
+    .pet-logo {
+      width: 7rem;
+      margin: auto;
+    }
+
+    .message-box {
+      width: 100%;
+      border: 1px solid #5738ab;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+
+      .message-title {
+        color: #5738ab;
+      }
+
+      .message-desc {
+        color: #890c50;
+      }
+    }
+
+    .book-feed {
+
+      .section-title {
+        margin: 1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #4525a2;
+      }
+
+      .book-scroll-container {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 1rem;
+        gap: 1rem;
+      }
+
+      .book-card {
+        width: 10rem;
+        min-width: 10rem;
+        flex-shrink: 0;
+        cursor: pointer;
+
+        img {
+          width: 100%;
+          height: 8rem;
+          object-fit: cover;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+        }
+
+        ion-card-header {
+          padding: 0.5rem;
+
+          ion-card-title {
+            font-size: 1.25rem;
+            line-height: 1.2;
+          }
+
+          ion-card-subtitle {
+            font-size: 0.75rem;
+            color: gray;
+          }
+        }
+      }
+    }
+
+    .explore-box {
+      height: 15rem;
+      overflow-y: auto;
+    
+      ion-card-title {
+        text-align: center;
+        font-size: 1.5rem;
+        color: #4525a2;
+      }
+    
+      ion-avatar {
+        width: 2rem;
+        height: 2rem;
+    
+        img {
+          object-fit: cover;
+        }
+      }
+    
+      ion-label {
+        font-size: 1rem;
+        color: #333;
+      }
+    }
+    
+
+  }
+}

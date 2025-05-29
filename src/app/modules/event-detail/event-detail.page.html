@@ -1,0 +1,27 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Calendario</span>
+  </div>
+</div>
+
+<ion-content>
+  <div class="event-title-container">
+    <h1 class="event-title">{{ event?.name }}</h1>
+  </div>
+
+  <div class="image-container" *ngIf="event?.imgEvent">
+    <img [src]="event.imgEvent" alt="Imagen del evento" class="event-image" />
+  </div>
+
+  <div class="event-info-box">
+    <p>{{event?.descriptionEvent}}</p>
+    <p><strong>Fecha de inicio:</strong> {{ event?.eventInitDate }}</p>
+    <p *ngIf="event?.eventEndDate"><strong>Fecha de fin:</strong> {{ event.eventEndDate }}</p>
+    <p><strong>Hora de inicio:</strong> {{ event?.eventInitTime }}</p>
+    <p *ngIf="event?.eventEndTime"><strong>Hora de fin:</strong> {{ event.eventEndTime }}</p>
+    <p><strong>Ubicación:</strong> {{ event?.location }}</p>
+    <p><strong>Precio:</strong> {{ event?.price === 0 ? 'Gratis' : event?.price + ' Bs' }}</p>
+    <p><strong>Compartible:</strong> {{ event?.shareEvent ? 'Sí' : 'No' }}</p>
+  </div>
+</ion-content>

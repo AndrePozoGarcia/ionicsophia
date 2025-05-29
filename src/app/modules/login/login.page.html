@@ -1,0 +1,45 @@
+<ion-content class="login-screen" fullscreen>
+  <div class="container">
+    <div class="logo-box">
+      <ion-img src="assets/img/logo-sophia.png" class="logo"></ion-img>
+    </div>
+    <div>
+      <form [formGroup]="formCredentials" (ngSubmit)="login()">
+        <ion-grid>
+          <ion-row class="ion-margin-vertical">
+            <ion-col size="12">
+              <ion-item>
+                <ion-input
+                  formControlName="username"
+                  placeholder="Ingrese su usuario"
+                  [clearInput]="true"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-margin-vertical">
+            <ion-col size="12">
+              <ion-item>
+                <ion-input
+                  formControlName="password"
+                  type="password"
+                  placeholder="Ingrese su contraseña"
+                  [clearInput]="true"
+                  value="password"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div class="flex ion-justify-content-center">
+          <ion-button type="submit">Ingresar</ion-button>
+        </div>
+      </form>
+    </div>
+    <div class="flex ion-align-items-center ion-justify-content-center">
+      <p>¿No tienes una cuenta?</p>
+      <a class="ion-margin-start" href="/registry">Registrate</a>
+    </div>
+    <div class="ion-text-center"><a href="/">Olvide mi contraseña</a></div>
+  </div>
+</ion-content>

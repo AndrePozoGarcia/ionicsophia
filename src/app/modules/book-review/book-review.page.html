@@ -1,0 +1,43 @@
+<div class="header">
+  <div class="custom-back-button" (click)="goBack()">
+    <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
+    <span class="text-center">Reseñar Libro</span>
+  </div>
+</div>
+
+<ion-content class="book-review-page">
+  <div class="review-form" [formGroup]="formReview">
+    <div class="stars">
+      <ion-icon *ngFor="let star of stars; let i = index" [name]="i < formReview.value.rating ? 'star' : 'star-outline'"
+        (click)="setRating(i)">
+      </ion-icon>
+    </div>
+    <ion-input placeholder="Título de la reseña" formControlName="title" class="review-title-input">
+    </ion-input>
+
+    <ion-textarea placeholder="Escriba el contenido de su reseña..." formControlName="review" [autoGrow]="true"
+      class="review-textarea">
+    </ion-textarea>
+
+    <ion-button class="publish-button" expand="block" (click)="publishReview()">Publicar</ion-button>
+  </div>
+
+  <p class="section-title">Otras Reseñas</p>
+
+  <div *ngFor="let club of clubs" class="review-card">
+    <div class="stars">
+      <ion-icon *ngFor="let star of stars; let i = index" [name]="i < club.review ? 'star' : 'star-outline'">
+      </ion-icon>
+    </div>
+    <h3>{{ club.name }}</h3>
+    <p class="description">{{ club.description }}</p>
+
+    <div class="review-footer">
+      <img [src]="club.img" alt="avatar" />
+      <div class="user-info">
+        <span>{{ club.username }}</span>
+        <p>{{ club.date }}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

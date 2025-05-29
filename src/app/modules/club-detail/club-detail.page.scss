@@ -1,0 +1,79 @@
+.club-title-container {
+    width: 80%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #6a4fb2;
+    border-radius: 20px;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    .club-title {
+        margin: auto;
+        font-size: 24px;
+        font-weight: lighter;
+
+        color: #6a4fb2;
+    }
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: none;
+
+    .club-image {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
+
+.club-info-box {
+    border: 2px solid #6a4fb2; // Morado oscuro
+    background-color: #f3edff; // Morado claro
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 1rem auto;
+
+    max-width: 80%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: #6a4fb2;
+        font-weight: 400;
+        text-align: justify;
+
+        strong {
+            color: #6a4fb2;
+            font-weight: 600;
+        }
+    }
+
+    // Más separación después de la descripción
+    p:first-of-type {
+        margin-bottom: 2rem;
+    }
+
+    // Separación ajustada entre los siguientes campos
+    p:not(:first-of-type) {
+        margin-top: 0.2rem;
+        line-height: 1rem;
+        text-align: justify;
+    }
+
+    // Buen espacio al final del último campo
+    p:last-of-type {
+        margin-bottom: 4rem;
+    }
+}
