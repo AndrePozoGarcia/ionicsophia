@@ -24,7 +24,7 @@
 
   <p class="section-title">Otras Reseñas</p>
 
-  <div *ngFor="let club of clubs" class="review-card">
+  <div *ngFor="let club of reviewsByBook" class="review-card">
     <div class="stars">
       <ion-icon *ngFor="let star of stars; let i = index" [name]="i < club.review ? 'star' : 'star-outline'">
       </ion-icon>

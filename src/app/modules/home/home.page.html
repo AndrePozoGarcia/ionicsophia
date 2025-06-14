@@ -3,25 +3,27 @@
     <div class="logo-box">
       <ion-img src="assets/img/logo-sophia3.png" class="logo"></ion-img>
       <p class="ion-text-uppercase">
-        <strong>Hola {{userLogged.name}}!</strong>
+        <strong>Hola {{userLogged?.name!}}!</strong>
       </p>
     </div>
     <div class="icons-box">
-      <a href="/app/notifications" class="icon-link">
+      <a [routerLink]="['/app/notifications']" class="icon-link">
         <ion-icon name="notifications-circle-outline" class="icon"></ion-icon>
         <ion-badge *ngIf="notifications?.length > 0" class="notification-badge"
           >{{ notifications.length }}</ion-badge
         >
       </a>
-      <a href="/app/my-profile" class="icon-link">
+      <a [routerLink]="['/app/my-profile']" class="icon-link">
         <ion-icon name="person-circle-outline" class="icon"></ion-icon>
       </a>
     </div>
   </div>
   <div class="body-box">
     <ion-searchbar
-      show-cancel-button="never"
+      [(ngModel)]="searchTerm"
+      (ionInput)="onSearchChange($event)"
       placeholder="Busca libros para intercambiar"
+      show-cancel-button="never"
     ></ion-searchbar>
 
     <ion-img src="assets/img/pet-icon.png" class="pet-logo"></ion-img>
@@ -35,30 +37,34 @@
       </p>
     </div>
 
-    <p>Recomendaciones Fantasia</p>
-    <div class="book-feed">
-      <div class="book-scroll-container">
-        <ion-card
-          *ngFor="let book of books"
-          class="book-card"
-          (click)="goToBook(book.id, books)"
-        >
-          <img [src]="book.img" alt="{{ book.name }}" />
-          <ion-card-header>
-            <ion-card-title>{{ book.name }}</ion-card-title>
-            <ion-card-subtitle>A {{ book.distance }}Km de ti</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
+    <div *ngIf="searchTerm && filteredBooks.length > 0">
+      <p class="section-title">Resultados de búsqueda</p>
+      <div class="book-feed">
+        <div class="book-scroll-container">
+          <ion-card
+            *ngFor="let book of filteredBooks"
+            class="book-card"
+            (click)="goToBook(book.id, filteredBooks)"
+          >
+            <img [src]="book.img" alt="{{ book.name }}" />
+            <ion-card-header>
+              <ion-card-title>{{ book.name }}</ion-card-title>
+              <ion-card-subtitle
+                >A {{ book.distance }}Km de ti</ion-card-subtitle
+              >
+            </ion-card-header>
+          </ion-card>
+        </div>
       </div>
     </div>
-
-    <p>Recomendaciones Clasicos</p>
+    
+    <p>Recomendaciones segun tus gustos</p>
     <div class="book-feed">
       <div class="book-scroll-container">
         <ion-card
-          *ngFor="let book of books2"
+          *ngFor="let book of booksByCategory"
           class="book-card"
-          (click)="goToBook(book.id, books2)"
+          (click)="goToBook(book.id, booksByCategory)"
         >
           <img [src]="book.img" alt="{{ book.name }}" />
           <ion-card-header>
@@ -81,7 +87,7 @@
             *ngFor="let category of categories"
             button
             lines="none"
-            (click)="goToCategory(category.id)"
+            (click)="goToCategory(category)"
           >
             <ion-avatar slot="start">
               <img [src]="category.img" alt="{{ category.name }}" />

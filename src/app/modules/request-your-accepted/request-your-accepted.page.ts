@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
-import { books, tradeBooks } from 'src/app/core/constants/books';
 import { chatGroups } from 'src/app/core/constants/chats';
-import { common } from 'src/app/core/constants/common';
 import { Book } from 'src/app/core/interfaces/book.interface';
-import { ChatGroup } from 'src/app/core/interfaces/chat.interface';
+import { User } from 'src/app/core/interfaces/user.interface';
+import { BooksService } from 'src/app/core/services/books.service';
+import { UsersService } from 'src/app/core/services/users.service';
 
 @Component({
   selector: 'app-request-your-accepted',
@@ -16,23 +16,40 @@ import { ChatGroup } from 'src/app/core/interfaces/chat.interface';
   imports: [IonicModule],
 })
 export default class RequestYourAcceptedPage implements OnInit {
+  private books: Book[] = [];
+  private chatGroupId: string = '';
+  protected requestUserId: string;
+  protected requestUserName: string;
+  protected usersMap: { [key: string]: string } = {};
   protected trade: Book;
-  private userLoggedId: number = common.userLoggedId;
 
   constructor(
     private route: ActivatedRoute,
     private navCtrl: NavController,
     private router: Router,
+    private booksService: BooksService,
+    private usersService: UsersService
   ) { }
 
-  ngOnInit() {
-    const tradeId = this.route.snapshot.paramMap.get('id') as unknown as number;
-    this.trade = books[tradeId];
+  async ngOnInit() {
+    this.loadUsers();
+    this.chatGroupId = this.route.snapshot.paramMap.get('id') as unknown as string;
+    this.requestUserId = this.chatGroupId.split('.')[0];
+    this.books = await this.booksService.getBooks();
+    this.trade = this.books.find(book => book.id == this.requestUserId);
+  }
+
+  private async loadUsers() {
+    const users: User[] = await this.usersService.getUsers();
+    this.usersMap = {};
+    users.forEach(user => {
+      this.usersMap[user.id] = user.name;
+    });
+    this.requestUserName = this.usersMap[this.requestUserId] || 'Desconocido';
   }
 
   protected goToChat() {
-    const chatGroupId = chatGroups.findIndex(group => group.user2Id === this.trade.userId && group.bookId === this.trade.id);
-    this.router.navigate(['/app/chat', chatGroupId]);
+    this.router.navigate(['/app/chat', this.chatGroupId]);
   }
 
   protected goBack() {

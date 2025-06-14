@@ -5,11 +5,23 @@
   </div>
 </div>
 
-<ion-content class="edit-user-container" [formGroup]="profileForm">
+<ion-content
+  class="edit-user-container"
+  [formGroup]="profileForm"
+  *ngIf="userLogged"
+>
   <div class="body-box">
     <div class="profile-header">
+      <input
+        formControlName="img"
+        type="file"
+        accept="image/*"
+        hidden
+        #userImageInput
+        (change)="onImageSelected($event)"
+      />
       <ion-avatar class="edit-avatar">
-        <ion-icon name="add-circle-outline" class="edit-icon"></ion-icon>
+        <ion-icon name="add-circle-outline" class="edit-icon" (click)="userImageInput.click()"></ion-icon>
       </ion-avatar>
       <div class="username">{{ userLogged.username }}</div>
     </div>
@@ -43,7 +55,11 @@
       <h2 class="block-title">Datos personales</h2>
       <div class="input-row">
         <ion-icon name="mail-outline" class="icon-left"></ion-icon>
-        <ion-input placeholder="Email" formControlName="email"></ion-input>
+        <ion-input
+          placeholder="Email"
+          formControlName="email"
+          [disabled]="true"
+        ></ion-input>
       </div>
       <div class="input-row">
         <ion-icon name="call-outline" class="icon-left"></ion-icon>
@@ -55,6 +71,7 @@
           placeholder="Password"
           type="password"
           formControlName="password"
+          [disabled]="true"
         ></ion-input>
       </div>
     </div>

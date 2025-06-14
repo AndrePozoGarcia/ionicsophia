@@ -1,5 +1,5 @@
 export interface Forum {
-  id: number,
+  id: string,
 
   title: string,
   createdBy: string,

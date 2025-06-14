@@ -1,20 +1,36 @@
+import { BookTradeStatus } from "../enums/book-trade-status.enum";
+
 export interface Book {
-  id: number,
+  id?: any,
 
   name: string,
   img: string,
+  qrImg: string,
+  description: string,
+  price: number,
 
   distance: number;
 
-  categoryId?: number;
+  categories: string[];
+
+  userId: any;
+  userUserName: string;
+
+  requestUsersIds: RequestBook[];
+
+  review: number;
+  author: string;
+  bookStatus: string;
+  cover: string;
   
-  userId?: number;
-  userUserName?: string;
-  review?: number;
-  author?: string;
-  genere?: string;
-  bookStatus?: string;
-  cover?: string;
-  
-  sinceTime?: string;
+  sinceTime: string;
+
+  soldOut: boolean;
+}
+
+export interface RequestBook {
+  id: string;
+  tradeStatus?: BookTradeStatus,
+  userId: string;
+  requestUserId: string;
 }

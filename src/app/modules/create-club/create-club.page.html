@@ -38,7 +38,7 @@
       </ion-label>
       <ion-item class="description-club">
         <ion-textarea
-          formControlName="contact"
+          formControlName="contactClub"
           placeholder="Ingresa un número de contacto"
         ></ion-textarea>
       </ion-item>
@@ -51,6 +51,7 @@
         type="file"
         accept="image/*"
         hidden
+        formControlName="imgClub"
         #fileInput
         (change)="onFileSelected($event)"
       />
@@ -72,7 +73,7 @@
       <hr class="custom-hr" />
       <ion-item class="ion-club-date">
         <ion-textarea
-          formControlName="clubInitDate"
+          formControlName="ClubDate"
           placeholder="Ingresa días de encuentro del club (ej: Lunes y Viernes)"
           auto-grow="true"
           rows="2"
@@ -87,7 +88,7 @@
       </ion-label>
       <hr class="custom-hr" />
       <ion-datetime
-        formControlName="clubInitTime"
+        formControlName="eventInitTime"
         class="club-time"
         presentation="time"
         hourCycle="h12"

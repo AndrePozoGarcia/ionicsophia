@@ -4,26 +4,43 @@
     <span class="text-center">Encuentra tu libro</span>
   </div>
 </div>
+
 <ion-content class="search-books-container">
   <div class="body-box">
-    <ion-searchbar
-      show-cancel-button="focus"
-      placeholder="Busqueda por genero"
-    ></ion-searchbar>
 
-    <ion-searchbar
-      show-cancel-button="focus"
-      placeholder="Busqueda por Titulo"
-    ></ion-searchbar>
+    <div class="filter-bar">
+      <ion-select
+        [(ngModel)]="selectedFilter"
+        interface="popover"
+        placeholder="Filtrar por"
+      >
+        <ion-select-option *ngFor="let key of filterKeys" [value]="key">
+          {{ bookFilter[key] }}
+        </ion-select-option>
+      </ion-select>
 
-    <ion-searchbar
-      show-cancel-button="focus"
-      placeholder="Busqueda por autor"
-    ></ion-searchbar>
+      <ion-searchbar
+        [(ngModel)]="searchTerm"
+        (ionInput)="applyFilter()"
+        placeholder="Buscar libro"
+        class="custom-searchbar"
+      ></ion-searchbar>
+    </div>
 
-    <ion-searchbar
-      show-cancel-button="focus"
-      placeholder="Busqueda por tipo de tapa"
-    ></ion-searchbar>
+    <p class="section-title">Resultados</p>
+    <div class="book-grid">
+      <ion-card
+        *ngFor="let book of filteredBooks"
+        class="book-card"
+        (click)="goToBook(book.id)"
+      >
+        <img [src]="book.img" alt="{{ book.name }}" />
+        <ion-card-header>
+          <ion-card-title>{{ book.name }}</ion-card-title>
+          <ion-card-subtitle>A {{ book.distance }}Km de ti</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
+

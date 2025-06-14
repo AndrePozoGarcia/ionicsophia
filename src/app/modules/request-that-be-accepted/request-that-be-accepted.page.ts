@@ -4,6 +4,7 @@ import { IonicModule, NavController } from '@ionic/angular';
 import { acceptedBooks } from 'src/app/core/constants/books';
 import { chatGroups } from 'src/app/core/constants/chats';
 import { Book } from 'src/app/core/interfaces/book.interface';
+import { BooksService } from 'src/app/core/services/books.service';
 
 @Component({
   selector: 'app-request-that-be-accepted',
@@ -14,23 +15,23 @@ import { Book } from 'src/app/core/interfaces/book.interface';
   imports: [IonicModule],
 })
 export default class RequestThatBeAcceptedPage implements OnInit {
-  protected trade: Book;
+  protected chatGroupId: string = '';
+  protected book: Book;
 
   constructor(
     private route: ActivatedRoute,
     private navCtrl: NavController,
     private router: Router,
+    private booksService: BooksService,
   ) { }
 
-  ngOnInit() {
-    const tradeId = this.route.snapshot.paramMap.get('id') as unknown as number;
-    this.trade = acceptedBooks[tradeId];
+  async ngOnInit() {
+    this.chatGroupId = this.route.snapshot.paramMap.get('id') as unknown as string;
+    this.book = await this.booksService.getBookById(this.chatGroupId.split('.')[1]);
   }
 
   protected goToChat() {
-    console.log(this.trade);
-    const chatGroupId = chatGroups.findIndex(group => group.user2Id === this.trade.userId && group.bookId === 7);
-    this.router.navigate(['/app/chat', chatGroupId]);
+    this.router.navigate(['/app/chat', this.chatGroupId]);
   }
 
   protected goBack() {

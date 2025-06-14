@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
+import { books } from 'src/app/core/constants/books';
+import { Book } from 'src/app/core/interfaces/book.interface';
+import { User } from 'src/app/core/interfaces/user.interface';
+import { BooksService } from 'src/app/core/services/books.service';
 import { NotificationService } from 'src/app/core/services/toast.service';
+import { UsersService } from 'src/app/core/services/users.service';
 
 @Component({
   selector: 'app-register-book',
@@ -23,13 +28,17 @@ export default class RegisterBookPage implements OnInit {
     private navCtrl: NavController,
     private fb: FormBuilder,
     private notificationService: NotificationService,
+    private booksService: BooksService,
+    private userService: UsersService,
   ) { }
 
   ngOnInit() {
     this.formRegistryBook = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      price: ['', Validators.required]
+      price: ['', Validators.required],
+      img: ['', Validators.required],
+      qrImg: ['', Validators.required],
     });
   }
 
@@ -37,17 +46,39 @@ export default class RegisterBookPage implements OnInit {
     this.navCtrl.back();
   }
 
-  protected save() {
-    console.log('form value:', this.formRegistryBook.value);
-
-    if (this.formRegistryBook.valid) {
-      console.log('Datos del libro:', this.formRegistryBook.value);
-      this.notificationService.showToast('Libro registrado con éxito', 'success');
+  protected async save() {
+    if (this.formRegistryBook.valid && this.selectedCoverFile && this.selectedQRFile) {
+      try {
+        const user: User = await this.userService.getCurrentUser();
+        const bookPayload: Book = {
+          name: this.formRegistryBook.value.name,
+          description: this.formRegistryBook.value.description,
+          price: this.formRegistryBook.value.price,
+          img: `assets/${this.selectedCoverFile.name}`,
+          qrImg: `assets/${this.selectedQRFile.name}`,
+          userId: user.id,
+          userUserName: user.name,
+          distance: 0,
+          categories: [],
+          requestUsersIds: [],
+          review: 0,
+          author: 'anonym',
+          bookStatus: 'Nuevo',
+          cover: 'Tapa blanda',
+          sinceTime: '',
+          soldOut: false
+        }
+        await this.booksService.addBook(bookPayload);
+        this.notificationService.showToast('Libro registrado con éxito', 'success');
+      } catch (error) {
+        console.error('Error al subir imágenes:', error);
+        this.notificationService.showToast('Error al registrar el libro', 'danger');
+      }
     } else {
-      console.warn('Formulario inválido');
-      this.notificationService.showToast('Por favor, completa todos los campos requeridos', 'danger');
+      this.notificationService.showToast('Completa todos los campos', 'danger');
     }
   }
+
 
   protected onImageSelected(event: Event, type: 'cover' | 'qr') {
     const input = event.target as HTMLInputElement;

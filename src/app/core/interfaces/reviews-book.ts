@@ -1,5 +1,5 @@
 export interface ReviewBook {
-    id: number,
+    id: any,
 
     name: string,
     description: string,
@@ -8,4 +8,5 @@ export interface ReviewBook {
     img?: string,
     username: string,
     date: string,
+    bookId: string,
 }

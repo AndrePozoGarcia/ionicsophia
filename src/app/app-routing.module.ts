@@ -1,22 +1,25 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { FooterTabsComponent } from './shared/footer-tabs/footer-tabs.component';
+import { authGuard, publicGuard } from './core/guards';
 
 const routes: Routes = [
-  { path: 'start', loadComponent: () => import('./modules/start/start.page') },
-  { path: 'init', loadComponent: () => import('./modules/init/init.page') },
-  { path: 'login', loadComponent: () => import('./modules/login/login.page') },
-  { path: 'registry', loadComponent: () => import('./modules/registry/registry.page') },
-  { path: 'create-event', loadComponent: () => import('./modules/create-event/create-event.page') },
-  { path: 'create-club', loadComponent: () => import('./modules/create-club/create-club.page') },
-  { path: 'onboarding', loadComponent: () => import('./modules/onboarding/onboarding.page') },
-  { path: 'custom-feed', loadComponent: () => import('./modules/custom-feed/custom-feed.page') },
-  { path: 'register-book',loadComponent: () => import('./modules/register-book/register-book.page')},
-  { path: 'book-review', loadComponent: () => import('./modules/book-review/book-review.page')},
+  { path: 'start', loadComponent: () => import('./modules/start/start.page'), canActivate: [publicGuard] },
+  { path: 'init', loadComponent: () => import('./modules/init/init.page'), canActivate: [publicGuard] },
+  { path: 'login', loadComponent: () => import('./modules/login/login.page'), canActivate: [publicGuard] },
+  { path: 'registry', loadComponent: () => import('./modules/registry/registry.page'), canActivate: [publicGuard] },
+
+  { path: 'create-event', loadComponent: () => import('./modules/create-event/create-event.page'), canActivate: [authGuard] },
+  { path: 'create-club', loadComponent: () => import('./modules/create-club/create-club.page'), canActivate: [authGuard] },
+  { path: 'onboarding', loadComponent: () => import('./modules/onboarding/onboarding.page'), canActivate: [authGuard] },
+  { path: 'custom-feed', loadComponent: () => import('./modules/custom-feed/custom-feed.page'), canActivate: [authGuard] },
+  { path: 'register-book', loadComponent: () => import('./modules/register-book/register-book.page'), canActivate: [authGuard] },
+  { path: 'book-review/:id', loadComponent: () => import('./modules/book-review/book-review.page'), canActivate: [authGuard] },
 
   {
     path: 'app',
     component: FooterTabsComponent,
+    canActivate: [authGuard],
     children: [
       { path: 'home', loadComponent: () => import('./modules/home/home.page') },
       { path: 'my-profile', loadComponent: () => import('./modules/my-profile/my-profile.page') },
@@ -33,9 +36,9 @@ const routes: Routes = [
       { path: 'request-sent/:id', loadComponent: () => import('./modules/request-sent/request-sent.page') },
       { path: 'forum-discussion/:id', loadComponent: () => import('./modules/forum-discussion/forum-discussion.page') },
       { path: 'chat/:id', loadComponent: () => import('./modules/chat/chat.page') },
-      { path: 'club-detail/:id', loadComponent: () => import('./modules/club-detail/club-detail.page')},
-      { path: 'event-detail/:id', loadComponent: () => import('./modules/event-detail/event-detail.page')},
-      { path: 'trades/:id', loadComponent: () => import('./modules/trades/trades.page')},
+      { path: 'club-detail/:id', loadComponent: () => import('./modules/club-detail/club-detail.page') },
+      { path: 'event-detail/:id', loadComponent: () => import('./modules/event-detail/event-detail.page') },
+      { path: 'trades/:id', loadComponent: () => import('./modules/trades/trades.page') },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ]
   },
@@ -44,7 +47,7 @@ const routes: Routes = [
   { path: '**', redirectTo: 'start' },
   {
     path: 'register-book',
-    loadChildren: () => import('./modules/register-book/register-book.module').then( m => m.RegisterBookPageModule)
+    loadChildren: () => import('./modules/register-book/register-book.module').then(m => m.RegisterBookPageModule)
   },
 ];
 

@@ -6,6 +6,8 @@ import { users } from 'src/app/core/constants/users';
 import { Book } from 'src/app/core/interfaces/book.interface';
 import { books, tradeBooks } from 'src/app/core/constants/books';
 import { CommonModule } from '@angular/common';
+import { UsersService } from 'src/app/core/services/users.service';
+import { BooksService } from 'src/app/core/services/books.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,28 +20,29 @@ import { CommonModule } from '@angular/common';
 
 export default class ProfilePage implements OnInit {
   protected user: User;
-  protected tradeBooks: Book[] = tradeBooks;
+  protected myBooks: Book[] = [];
 
-  private userId: number;
+  constructor(
+    private route: ActivatedRoute,
+    private navCtrl: NavController,
+    private router: Router,
+    private usersService: UsersService,
+    private booksService: BooksService
+  ) { }
 
-  constructor(private route: ActivatedRoute, private navCtrl: NavController, private router: Router) { }
-
-  ngOnInit() {
-    this.userId = this.route.snapshot.paramMap.get('id') as unknown as number;
-    this.user = users[this.userId];
-    // Aquí puedes hacer una llamada al backend para obtener los datos del usuario
-    console.log('User ID:', this.userId);
+  async ngOnInit() {
+    const userId = this.route.snapshot.paramMap.get('id') as unknown as string;
+    this.user = await this.usersService.getUserByUserId(userId);
+    const books = await this.booksService.getBooks();
+    this.myBooks = books.filter(book => book.userId == userId);
   }
 
   protected goBack() {
     this.navCtrl.back();
-
   }
 
   protected goToBook(id: number, list: Book[]) {
-    const bookName = list[id].name;
-    const bookId = books.findIndex((book) => book.name === bookName);
-    this.router.navigate(['/app/trades/', bookId]);
+    this.router.navigate(['/app/trades/', id]);
   }
 
 }

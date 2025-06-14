@@ -2,7 +2,7 @@ import { CalendarClub } from "../interfaces/calendar-club";
 
 export const clubs : CalendarClub [] = [
     {
-        id: 0,
+        id: '0',
         name: 'Bookily',
         descriptionClub: 'Bookily es un club de lectura donde cada semana exploramos y debatimos diferentes libros, compartiendo ideas y perspectivas. Únete a nuestra comunidad y disfruta de la pasión por la lectura en un espacio acogedor y enriquecedor.',
         contactClub: 60100001,
@@ -14,7 +14,7 @@ export const clubs : CalendarClub [] = [
         shareClub: true,
     },
     {
-        id: 1,
+        id: '1',
         name: 'Bookista',
         descriptionClub: 'Bookista es un club de lectura en el cual compartimos nuestros pesamamientos y análisis sobre diferentes libros semanalmente. Incríbete y compartamos la pasión por la lectura en un ambiente seguro',
         contactClub: 75000001,

@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
-import { events } from 'src/app/core/constants/event';
 import { CalendarEvent } from 'src/app/core/interfaces/calendar-event';
+import { EventsService } from 'src/app/core/services/events.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -13,16 +13,18 @@ import { CalendarEvent } from 'src/app/core/interfaces/calendar-event';
   imports: [IonicModule, CommonModule],
 })
 export default class EventDetailPage implements OnInit {
-  event: CalendarEvent;
+  protected event: CalendarEvent;
 
   constructor(
     private navCtrl: NavController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private eventsService: EventsService,
   ) { }
 
-  ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.event = events[id];
+  async ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    const events = await this.eventsService.getEvents();
+    this.event = events.find(event => event.id == id);
   }
 
   goBack() {

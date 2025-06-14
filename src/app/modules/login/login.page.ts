@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { users } from 'src/app/core/constants/users';
 import { User } from 'src/app/core/interfaces/user.interface';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/toast.service';
 
 @Component({
@@ -21,28 +22,31 @@ export default class LoginPage implements OnInit {
 
   private userLogged: User;
 
-  constructor(private router: Router, private notificationService: NotificationService) { }
+  constructor(
+    private router: Router,
+    private notificationService: NotificationService,
+    private authService: AuthService,
+  ) { }
 
   ngOnInit() {
     this.formCredentials = new FormGroup({
-      username: new FormControl<string>(''),
+      email: new FormControl<string>(''),
       password: new FormControl<string>(''),
     });
   }
 
-  //Reemplazar el contenido cuando se haga el servicio de autenticacion
-  protected login() {
-    if (this.isCredentialsCorrect(this.formCredentials.get('username').value)) {
-      this.notificationService.showToast(`Bienvenido ${this.userLogged.name}`, 'success');
-      //Aca actualmente lo deje como una variable el reconocimiento de si es un nuevo usuario para ir a /home o /onboarding, esto mas adelante se puede hacer con el service de auth
-      this.router.navigate([this.userLogged.isNewUser ? '/onboarding' : '/app/home'])
-    } else {
-      this.notificationService.showToast(`Credenciales incorrectas`, 'danger');
+  protected async login() {
+    if (this.formCredentials.invalid) {
+      this.notificationService.showToast('Llene todos los campos porfavor', 'warning');
+      return;
     }
-  }
 
-  private isCredentialsCorrect(username: string) {
-    this.userLogged = users.find(user => username === user.username);
-    return !!this.userLogged && !!this.formCredentials.get('password').value;
+    try {
+      await this.authService.logInWithEmail(this.formCredentials.value);
+      this.router.navigate(['/app/home']);
+    } catch (error) {
+      this.notificationService.showToast('Error al iniciar sesión', 'danger');
+      console.error('Login error:', error);
+    }
   }
 }

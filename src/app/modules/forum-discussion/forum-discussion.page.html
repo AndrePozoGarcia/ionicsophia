@@ -27,11 +27,17 @@
 
   <div class="comment-input">
     <ion-item>
-      <ion-input
+      <ion-textarea
+        auto-grow
         [(ngModel)]="newComment"
         placeholder="Escribe un comentario..."
-      ></ion-input>
-      <ion-button fill="clear" (click)="submitComment()">Enviar</ion-button>
+      ></ion-textarea>
+      <ion-button
+        fill="clear"
+        [disabled]="!newComment.trim()"
+        (click)="submitComment()"
+        >Enviar</ion-button
+      >
     </ion-item>
   </div>
 </ion-content>

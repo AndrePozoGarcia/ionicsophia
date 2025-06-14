@@ -5,11 +5,12 @@
   </div>
 </div>
 
-<ion-content class="register-book-page">
+<ion-content class="register-book-page" [formGroup]="formRegistryBook">
   <div class="upload-section">
     <div class="upload-label">
       <p>Carga la portada del libro</p>
       <input
+        formControlName="img"
         type="file"
         accept="image/*"
         hidden
@@ -24,23 +25,20 @@
       <img [src]="previewCover" alt="Portada del libro" />
     </div>
   </div>
-  <div class="form-box" [formGroup]="formRegistryBook">
+  <div class="form-box">
     <ion-item lines="full" class="custom-input">
       <ion-label position="stacked">Nombre</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
-      <ion-icon name="close-outline" slot="end"></ion-icon>
     </ion-item>
 
     <ion-item lines="full" class="custom-input">
       <ion-label position="stacked">Detalles</ion-label>
       <ion-input type="text" formControlName="description"></ion-input>
-      <ion-icon name="close-outline" slot="end"></ion-icon>
     </ion-item>
 
     <ion-item lines="full" class="custom-input">
       <ion-label position="stacked">Precio</ion-label>
       <ion-input type="number" formControlName="price"></ion-input>
-      <ion-icon name="close-outline" slot="end"></ion-icon>
     </ion-item>
   </div>
 
@@ -48,6 +46,7 @@
     <div class="upload-label">
       <p>Carga el qr del pago</p>
       <input
+        formControlName="qrImg"
         type="file"
         accept="image/*"
         hidden

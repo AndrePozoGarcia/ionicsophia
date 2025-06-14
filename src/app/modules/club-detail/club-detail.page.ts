@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
-import { clubs } from 'src/app/core/constants/club';
 import { CalendarClub } from 'src/app/core/interfaces/calendar-club';
+import { ClubsService } from 'src/app/core/services/club.service';
 
 @Component({
   selector: 'app-club-detail',
@@ -13,20 +13,21 @@ import { CalendarClub } from 'src/app/core/interfaces/calendar-club';
   imports: [IonicModule, CommonModule],
 })
 export default class ClubDetailPage implements OnInit {
-  club: CalendarClub;
+  protected club: CalendarClub;
 
   constructor(
     private navCtrl: NavController,
     private route: ActivatedRoute,
+    private clubsService: ClubsService
   ) { }
 
-  ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.club = clubs[id]
+  async ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    const clubs = await this.clubsService.getClubs();
+    this.club = clubs.find(club => club.id == id);
   }
 
   goBack() {
     this.navCtrl.back();
   }
-
 }

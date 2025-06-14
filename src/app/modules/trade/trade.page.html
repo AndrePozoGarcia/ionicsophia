@@ -20,24 +20,24 @@
 
     <div *ngIf="selectedTab === 'pending'" class="tab-content">
       <h3 class="section-title">Pendientes por aceptar</h3>
-      <ion-list *ngIf="pendingBooks.length > 0">
-        <ion-item-sliding *ngFor="let book of pendingBooks">
+      <ion-list *ngIf="pendingForAccept.length > 0">
+        <ion-item-sliding *ngFor="let book of pendingForAccept">
           <ion-item>
             <ion-thumbnail slot="start">
               <img [src]="book.img" />
             </ion-thumbnail>
             <ion-label>
-              <h2>{{ book.userUserName }} - {{ book.name }}</h2>
+              <h2>{{ usersMap[book.requestUsersIds[0]?.requestUserId] }} - {{ book.name }}</h2>
               <p>Hace {{ book.sinceTime }}</p>
             </ion-label>
           </ion-item>
           <ion-item-options side="start">
-            <ion-item-option color="danger" (click)="rejectTradeBook(book.id)">
+            <ion-item-option color="danger" (click)="rejectTradeBook(book)">
               Rechazar
             </ion-item-option>
           </ion-item-options>
           <ion-item-options side="end">
-            <ion-item-option color="success" (click)="acceptTradeBook(book.id)">
+            <ion-item-option color="success" (click)="acceptTradeBook(book)">
               Aceptar
             </ion-item-option>
           </ion-item-options>
@@ -45,11 +45,11 @@
       </ion-list>
 
       <h3 class="section-title">Esperando respuesta</h3>
-      <ion-list *ngIf="waitingBooks.length > 0">
+      <ion-list *ngIf="waitingResponse.length > 0">
         <ion-item
-          *ngFor="let book of waitingBooks"
+          *ngFor="let book of waitingResponse"
           button
-          (click)="goToRequestBook(book.id)"
+          (click)="goToRequestBook(book)"
         >
           <ion-thumbnail slot="start">
             <img [src]="book.img" />
@@ -64,11 +64,11 @@
 
     <div *ngIf="selectedTab === 'accepted'" class="tab-content">
       <h3 class="section-title">Solicitudes que fueron aceptadas</h3>
-      <ion-list *ngIf="acceptedBooks.length > 0">
+      <ion-list *ngIf="yourAAcceptedBooks.length > 0">
         <ion-item
-          *ngFor="let book of acceptedBooks"
+          *ngFor="let book of yourAAcceptedBooks"
           button
-          (click)="goToAcceptedBook(book.id)"
+          (click)="goToAcceptedBook(book)"
         >
           <ion-thumbnail slot="start">
             <img [src]="book.img" />

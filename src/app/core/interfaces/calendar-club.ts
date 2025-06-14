@@ -1,5 +1,5 @@
 export interface CalendarClub {
-    id: number;
+    id: string;
     name: string;
     descriptionClub: string;
     contactClub: number;

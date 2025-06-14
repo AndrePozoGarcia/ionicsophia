@@ -30,7 +30,7 @@ export class ExchangeRequestModalComponent {
     this.modalCtrl.dismiss();
 
     setTimeout(() => {
-      this.router.navigate(['/app/request-your-accepted', this.bookId]);
+      this.router.navigate(['/app/request-sent', this.bookId]);
     }, 1000)
   }
 }

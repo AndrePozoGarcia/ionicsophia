@@ -5,18 +5,22 @@
   </div>
 </div>
 
-<ion-content class="my-profile-container">
+<ion-content class="my-profile-container" *ngIf="userLogged">
   <div class="body-box">
-    <a href="/app/my-profile-settings" class="icon-settings">
+    <a [routerLink]="['/app/my-profile-settings']" class="icon-settings">
       <ion-icon name="settings-outline" class="icon"></ion-icon>
     </a>
 
     <div class="avatar-box">
       <ion-avatar class="custom-avatar">
-        <img alt="user image" [src]="userLogged.img" />
+        <img alt="user image" [src]="getUserProfileImage(userLogged.img)"/>
       </ion-avatar>
     </div>
     <div class="username-text">{{userLogged.username}}</div>
+    <ion-button (click)="logOut()" fill="clear" size="small">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>Cerrar
+      sesión</ion-button
+    >
 
     <p class="book-list-title ion-text-uppercase">
       Mis libros disponibles a intercambio
@@ -29,9 +33,9 @@
           </div>
         </ion-card>
         <ion-card
-          *ngFor="let book of tradeBooks"
+          *ngFor="let book of myBooks"
           class="book-card"
-          (click)="goToBook(book.id, tradeBooks)"
+          (click)="goToBook(book.id, myBooks)"
         >
           <img [src]="book.img" alt="{{ book.name }}" />
           <ion-card-header>

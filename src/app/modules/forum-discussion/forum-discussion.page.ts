@@ -3,10 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { forumComments } from 'src/app/core/constants/forum-comments';
 import { ForumComment } from 'src/app/core/interfaces/forum-comment.interface';
-import { forums } from 'src/app/core/constants/forums';
 import { Forum } from 'src/app/core/interfaces/forum.interface';
+import { ForumsService } from 'src/app/core/services/forum.service';
+import { ForumCommentsService } from 'src/app/core/services/forum-comments.service';
+import { UsersService } from 'src/app/core/services/users.service';
+import { User } from 'src/app/core/interfaces/user.interface';
+import { forumComments } from 'src/app/core/constants/forum-comments';
 
 @Component({
   selector: 'app-forum-discussion',
@@ -16,17 +19,29 @@ import { Forum } from 'src/app/core/interfaces/forum.interface';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export default class ForumDiscussionPage implements OnInit {
-  protected forumId: number;
+  protected forumId: string;
   protected forum: Forum | undefined;
   protected comments: ForumComment[] = [];
   protected newComment: string = '';
+  protected userLogged: User;
 
-  constructor(private route: ActivatedRoute, private navCtrl: NavController) { }
+  constructor(
+    private route: ActivatedRoute,
+    private navCtrl: NavController,
+    private forumsService: ForumsService,
+    private forumCommentsService: ForumCommentsService,
+    private usersService: UsersService,
+  ) { }
 
-  ngOnInit() {
-    this.forumId = Number(this.route.snapshot.paramMap.get('id'));
-    this.comments = forumComments.filter(c => c.forumId === this.forumId);
-    this.forum = forums.find(f => f.id === this.forumId);
+  async ngOnInit() {
+    this.forumId = this.route.snapshot.paramMap.get('id');
+
+    this.userLogged = await this.usersService.getCurrentUser();
+    const forumsFS = await this.forumsService.getForums();
+    const forumComments = await this.forumCommentsService.getForumComments();
+
+    this.comments = forumComments.filter(c => c.forumId == this.forumId);
+    this.forum = forumsFS.find(f => f.id == this.forumId);
   }
 
   protected goBack() {
@@ -39,20 +54,24 @@ export default class ForumDiscussionPage implements OnInit {
     );
   }
 
-  protected submitComment() {
+  protected async submitComment() {
     if (!this.newComment.trim()) return;
 
     const newForumComment: ForumComment = {
-      id: Date.now(),
-      createdAt: new Date(),
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString(),
       comment: this.newComment,
       forumId: this.forumId,
-      userId: 99,
-      userName: 'Tú',
-      userImg: 'assets/img/users/default-user.png',
+      userId: this.userLogged.id,
+      userName: this.userLogged.username,
+      userImg: this.userLogged.img,
     };
 
-    this.comments.push(newForumComment);
+    this.forumCommentsService.addForumComment(newForumComment);
+
+    const forumComments = await this.forumCommentsService.getForumComments();
+    this.comments = forumComments.filter(c => c.forumId == this.forumId);
+
     this.newComment = '';
   }
 

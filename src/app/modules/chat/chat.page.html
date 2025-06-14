@@ -1,27 +1,29 @@
 <div class="header mb-2rem">
   <div class="custom-back-button" (click)="goBack()">
     <ion-icon name="arrow-back-outline" class="icon-left"></ion-icon>
-    <span class="text-center">CHAT {{chatGroup?.user2Name}} - {{chatGroup?.bookName}}</span>
+    <span class="text-center"
+      >CHAT {{user2?.name}} - {{book?.name}}</span
+    >
   </div>
 </div>
 
 <ion-content class="chat-content" [scrollEvents]="true">
   <div
-    *ngFor="let chat of chatGroup?.chats"
+    *ngFor="let chat of messages"
     class="chat-message"
     [ngClass]="{
-    'from-logged': chat.userId === userLoggedId,
-    'from-user2': chat.userId !== userLoggedId
+    'from-logged': chat.userId === userLogged.id,
+    'from-user2': chat.userId !==  userLogged.id
   }"
   >
-    <ng-container *ngIf="chat.userId !== userLoggedId">
+    <ng-container *ngIf="chat.userId !== userLogged.id">
       <ion-avatar class="chat-avatar">
-        <img [src]="chatGroup.user2Img" alt="Avatar" />
+        <img [src]="user2.img" alt="Avatar" />
       </ion-avatar>
       <div class="chat-bubble user2-bubble">{{ chat.message }}</div>
     </ng-container>
 
-    <ng-container *ngIf="chat.userId === userLoggedId">
+    <ng-container *ngIf="chat.userId === userLogged.id">
       <div class="chat-bubble logged-bubble">{{ chat.message }}</div>
     </ng-container>
   </div>

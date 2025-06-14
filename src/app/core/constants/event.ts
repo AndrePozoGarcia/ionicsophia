@@ -2,7 +2,7 @@ import { CalendarEvent } from "../interfaces/calendar-event";
 
 export const events: CalendarEvent[] = [
     {
-        id: 0,
+        id: '0',
         name: 'Feria del libro',
         typeEvent: 'Feria',
         descriptionEvent: 'La Feria Internacional del Libro de La Paz llega con stands de editoriales, autores independientes y eventos como charlas y talleres de escritura. Un espacio ideal para descubrir nuevas historias y conectar con la literatura.',
@@ -16,7 +16,7 @@ export const events: CalendarEvent[] = [
         shareEvent: true,
     },
     {
-        id: 1,
+        id: '1',
         name: 'Analisis de "La Odisea"',
         typeEvent: 'Analisis',
         descriptionEvent: 'El analista literario Adrián Valverde presentará un análisis de La Odisea, explorando su simbolismo, estructura y relevancia en la literatura actual. Una oportunidad única para descubrir nuevas perspectivas sobre esta obra clásica y su impacto en las narrativas modernas.',

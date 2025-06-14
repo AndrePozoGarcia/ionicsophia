@@ -1,102 +1,101 @@
 .book-image {
-    width: 150px;
-    height: auto;
-    border-radius: 20px;
-    margin-bottom: 10px;
+  width: 150px;
+  height: auto;
+  border-radius: 20px;
+  margin-bottom: 10px;
 }
 
 .owner-text {
-    margin: 0;
-    color: #6a4e8a;
+  margin: 0;
+  color: #6a4e8a;
 }
 
 .owner-username {
-    color: #6a4e8a;
-    font-weight: lighter;
+  color: #6a4e8a;
+  font-weight: lighter;
 }
 
 .star {
-    font-size: 1.5rem;
-    color: #6a4e8a;
+  font-size: 1.5rem;
+  color: #6a4e8a;
 }
 
 .review-link {
-    font-weight: 300;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    color: #6a4e8a;
+  font-weight: 300;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  color: #6a4e8a;
 }
 
 .details-card {
-    background-color: white;
-    border: 2px solid #6a4e8a;
+  background-color: white;
+  border: 2px solid #6a4e8a;
+  color: #6a4e8a;
+  border-radius: 20px;
+  margin-top: 1rem;
+
+  .text-container {
     color: #6a4e8a;
-    border-radius: 20px;
-    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    margin-bottom: 0.1rem;
+  }
 
-    .text-container {
-        color: #6a4e8a;
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        align-items: left;
-        margin-bottom: 0.1rem;
-    }
+  .distance {
+    font-size: 0.9rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.4rem;
+    color: #6a4e8a;
+  }
 
-    .distance {
-        font-size: 0.9rem;
-        margin-top: 0.1rem;
-        margin-bottom: 0.4rem;
-        color: #6a4e8a;
-    }
+  ion-text {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    color: #6a4e8a;
+  }
 
-    ion-text {
-        font-size: 0.9rem;
-        margin-bottom: 0.4rem;
-        color: #6a4e8a;
-    }
-
-    ion-card-title {
-        font-size: 1.5rem;
-        color: #6a4e8a;
-    }
+  ion-card-title {
+    font-size: 1.5rem;
+    color: #6a4e8a;
+  }
 }
 
 .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    color: #6a4e8a;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #6a4e8a;
 }
 
 .favorite-button {
-    background-color: white;
-    border: 2px solid #6a4e8a;
-    border-radius: 50%;
-    width: 4.5rem;
-    height: 3.5rem;
+  background-color: white;
+  border: 2px solid #6a4e8a;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
 
-    ion-icon {
-        width: 100%;
-        height: 100%;
+  ion-icon {
+    width: 100%;
+    height: 100%;
 
-        color: #6a4e8a;
-    }
+    color: #6a4e8a;
+  }
 }
 
 .exchange-button {
-    border-radius: 100%;
-    width: 80%;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    margin-left: 2rem;
-    margin-right: 5rem;
-
+  border-radius: 100%;
+  width: 80%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-right: 5rem;
 }
 
 
 .sale-text {
-    font-size: 0.8rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }

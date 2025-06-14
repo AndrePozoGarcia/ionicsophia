@@ -1,12 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
-import { chatGroups } from 'src/app/core/constants/chats';
-import { common } from 'src/app/core/constants/common';
-import { ChatGroup } from 'src/app/core/interfaces/chat.interface';
+import { Book } from 'src/app/core/interfaces/book.interface';
+import { Chat, ChatGroup } from 'src/app/core/interfaces/chat.interface';
+import { User } from 'src/app/core/interfaces/user.interface';
+import { BooksService } from 'src/app/core/services/books.service';
+import { ChatService } from 'src/app/core/services/chats.service';
 import { NotificationService } from 'src/app/core/services/toast.service';
+import { UsersService } from 'src/app/core/services/users.service';
 
 @Component({
   selector: 'app-chat',
@@ -17,32 +20,60 @@ import { NotificationService } from 'src/app/core/services/toast.service';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export default class ChatPage implements OnInit {
-  protected userLoggedId: number = common.userLoggedId;
-  protected chatGroup: ChatGroup;
+  protected userLogged: User;
+  protected user2: User;
+  protected book: Book;
   protected newMessage: string = '';
+  protected groupId: string;
+  protected messages: Chat[] = [];
 
-  constructor(private route: ActivatedRoute, private navCtrl: NavController, private notificationService: NotificationService) { }
+  private unsubscribe: () => void;
 
-  ngOnInit() {
-    const chatGroupId = Number(this.route.snapshot.paramMap.get('id'));
-    this.chatGroup = chatGroups.find(group => group.id === chatGroupId);
-    if (!this.chatGroup) {
-      this.notificationService.showToast('Chat no encontrado, intente con otro libro.', 'danger');
-      this.navCtrl.back();
-      return;
-    }
+  constructor(
+    private route: ActivatedRoute,
+    private navCtrl: NavController,
+    private chatService: ChatService,
+    private notificationService: NotificationService,
+    private usersService: UsersService,
+    private booksService: BooksService,
+  ) { }
+
+  async ngOnInit() {
+    const chatGroupId = this.route.snapshot.paramMap.get('id');
+    this.groupId = chatGroupId;
+    this.setData(chatGroupId);
+
+    this.unsubscribe = this.chatService.listenToMessages(this.groupId, (msgs) => {
+      this.messages = msgs;
+    });
   }
 
-  protected sendMessage() {
+  private async setData(id: string) {
+    this.userLogged = await this.usersService.getCurrentUser();
+
+    const [part1, bookIdRaw, part2] = id.split('.');
+
+    const id1 = part1;
+    const id2 = part2;
+    const bookId = bookIdRaw;
+
+    const otherUserId = id1 === this.userLogged.id ? id2 : id1;
+
+    this.user2 = await this.usersService.getUserByUserId(otherUserId);
+    this.book = await this.booksService.getBookByBookId(bookId);
+  }
+
+  ngOnDestroy() {
+    if (this.unsubscribe) this.unsubscribe();
+  }
+
+  protected async sendMessage() {
     if (!this.newMessage.trim()) return;
-
-    this.chatGroup.chats.push({
-      id: Date.now(),
-      userId: this.userLoggedId,
+    await this.chatService.sendMessage(this.groupId, {
+      userId: this.userLogged.id,
       message: this.newMessage,
-      createdAt: new Date()
+      createdAt: new Date().toISOString(),
     });
-
     this.newMessage = '';
   }
 

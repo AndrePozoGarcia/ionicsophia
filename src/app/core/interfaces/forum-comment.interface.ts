@@ -1,11 +1,11 @@
 export interface ForumComment {
-  id: number,
-  createdAt: Date,
+  id: string,
+  createdAt: string,
   comment: string,
   imgAttached?: string,
 
-  forumId?: number,
-  userId?: number,
+  forumId?: string,
+  userId?: string,
 
   userName?: string,
   userImg?: string,

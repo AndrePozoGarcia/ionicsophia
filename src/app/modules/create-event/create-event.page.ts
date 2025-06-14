@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
 import { CalendarEvent } from 'src/app/core/interfaces/calendar-event';
+import { EventsService } from 'src/app/core/services/events.service';
 import { NotificationService } from 'src/app/core/services/toast.service';
+import { CalendarService } from '../calendar/services/calendar.service';
 
 @Component({
   selector: 'app-create-event',
@@ -22,7 +24,9 @@ export default class CreateEventPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private fb: FormBuilder,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private eventsService: EventsService,
+    private calendarService: CalendarService,
   ) { }
 
   ngOnInit() {
@@ -49,18 +53,22 @@ export default class CreateEventPage implements OnInit {
     console.log('Formulario enviado:', this.eventForm.value);
     if (this.eventForm.valid) {
       const event: CalendarEvent = this.eventForm.value;
-      console.log('Evento creado:', event);
-      // Aquí puedes agregar tu lógica para guardar el evento
+      const payload: CalendarEvent = {
+        ...event,
+        id: Date.now().toString(),
+        imgEvent: `assets/${this.selectedFile.name}`
+      }
+      this.eventsService.addEvent(payload);
       this.notificationService.showToast('Evento creado con éxito', 'success');
       this.goBack();
     } else {
       this.notificationService.showToast('Por favor completa todos los campos requeridos', 'danger');
       console.log('Formulario inválido:', this.eventForm.errors);
-      // Aquí puedes agregar tu lógica para manejar el error de formulario inválido
     }
   }
 
   protected goBack() {
+    this.calendarService.setFilterTrigger(Date.now().toString());
     this.navCtrl.back();
   }
 

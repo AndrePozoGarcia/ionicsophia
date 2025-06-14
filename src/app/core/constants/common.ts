@@ -1,4 +1,4 @@
 export const common =
 {
-  userLoggedId: 0,
+  user1Id: 0,
 }

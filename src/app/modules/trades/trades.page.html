@@ -38,7 +38,7 @@
   
     <ion-card-content>
       <p><strong>Autor:</strong> {{ book.author }}</p>
-      <p><strong>Género:</strong> {{ book.genere }}</p>
+      <p><strong>Género:</strong> {{ book.categories[0]! ?? 'Ninguno'}}</p>
       <p><strong>Estado del libro:</strong> {{ book.bookStatus }}</p>
       <p><strong>Tapa:</strong> {{ book.cover }}</p>
     </ion-card-content>

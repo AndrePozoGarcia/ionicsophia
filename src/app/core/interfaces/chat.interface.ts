@@ -1,25 +1,25 @@
 export interface ChatGroup {
-  id: number,
+  id: any,
 
-  userLoggedId: number,
-  userLoggedName: string,
-  userLoggedImg: string,
+  user1Id: any,
+  user1Name: string,
+  user1Img: string,
   
-  user2Id: number,
+  user2Id: any,
   user2Name: string,
   user2Img: string,
 
-  bookId: number,
+  bookId: any,
   bookName: string,
 
   chats: Chat[];
 }
 
 export interface Chat {
-  id: number,
+  id: any,
 
-  userId: number,
+  userId: any,
   message: string,
   img?: string,
-  createdAt: Date,
+  createdAt: any,
 }
